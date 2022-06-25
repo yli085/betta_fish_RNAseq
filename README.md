@@ -1,4 +1,4 @@
-# betta_fish_RNAseq
+# Betta fish RNA-seq project
 
 ## Questions
 -	Study sex determination by comparing a given set of genes’ expression levels of the Ovary tissue and Testis samples.
