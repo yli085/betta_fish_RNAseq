@@ -71,12 +71,14 @@ anno_ns <-  anno[which(anno$label=='ns'),]
 # plot
 # line width (box, axis), text/label character size (x, y axis, legend, annotation text)
 # customized: y axis breaks, legend labels, legend positions
-bxplt <- ggplot(df, aes(x=gene, y=expr, group = interaction(group, gene)))
+filenm <- "boxplot/Ovary_Testis_boxplot.pdf"
 
-bxplt+geom_boxplot(aes(fill=group),
+bxplt <- ggplot(df, aes(x=gene, y=expr, group = interaction(group, gene)))+
+  geom_boxplot(aes(fill=group),
                    width=0.5, lwd=1, fatten=1) +
   labs(x='', y=expression('Expression Level (Log'[2]*'CPM)')) +
-  scale_fill_manual(values=c("dodgerblue", "tan2"))+
+  # purple-orange colors
+  scale_fill_manual(values=c("#5D3A9B","#E66100"))+
   scale_y_continuous(breaks=c(0, 4, 8, 12))+
   geom_text(data =anno_sig, aes(x, y, label=label, group=NULL),
             size=14, color="red", fontface="bold") +
@@ -96,7 +98,7 @@ bxplt+geom_boxplot(aes(fill=group),
   theme(plot.margin =  margin(t = 0.25, r = 0.25, b = 0.25, l = 0.25, unit = "cm"))
 
 # saved as 12 x 6 inches pdf.
-
+ggsave(bxplt,filename = filenm, width=12, height=6, units="in")
 
 
 # Long fin vs Short fin ---------------------------------------------------
@@ -153,13 +155,14 @@ anno_ns <-  anno[which(anno$label=='ns'),]
 # plot
 # line width (box, axis), text/label character size (x, y axis, legend, annotation text)
 # customized: y axis breaks, legend labels, legend positions
+filenm <- "boxplot/Long_short_fin_boxplot.pdf"
 
-bxplt <- ggplot(df, aes(x=gene, y=expr, group = interaction(group, gene)))
-
-bxplt+geom_boxplot(aes(fill=group),
+bxplt <- ggplot(df, aes(x=gene, y=expr, group = interaction(group, gene)))+
+  geom_boxplot(aes(fill=group),
                    width=0.5, lwd=1, fatten=1) +
   labs(x='', y=expression('Expression Level (Log'[2]*'CPM)')) +
-  scale_fill_manual(values=c("dodgerblue", "tan2"),
+  # purple-orange colors
+  scale_fill_manual(values=c("#5D3A9B","#E66100"),
                     labels = c("Halfmoon", "HMPK"))+
   scale_y_continuous(breaks=c(0, 4, 8))+
   geom_text(data =anno_sig, aes(x, y, label=label, group=NULL),
@@ -180,3 +183,4 @@ bxplt+geom_boxplot(aes(fill=group),
   theme(plot.margin =  margin(t = 0.25, r = 0.25, b = 0.25, l = 0.25, unit = "cm"))
 
 # saved in 12 X 6 inches pdf
+ggsave(bxplt,filename = filenm, width=12, height=6, units="in")
